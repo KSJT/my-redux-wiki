@@ -1,0 +1,37 @@
+.home {
+  flex: 1 1 auto;
+  position: relative;
+}
+
+.grid_container {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  margin: 1rem 2rem;
+  height: 95%;
+}
+
+.grid_container > div {
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px solid rgb(185, 183, 183);
+}
+.item1 {
+  grid-row-start: 1;
+  grid-row-end: 5;
+}
+.item2 {
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.item3 {
+  grid-row-start: 2;
+  grid-row-end: 5;
+}
+.item4 {
+  grid-row-start: 5;
+  grid-row-end: 7;
+}
+.item5 {
+  grid-row-start: 5;
+  grid-row-end: 7;
+}

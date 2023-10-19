@@ -1,0 +1,54 @@
+.modal_back {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: absolute;
+  min-height: 300px;
+  max-height: 500px;
+  min-width: 300px;
+  max-width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+  background-color: rgb(247, 246, 244);
+  z-index: 9;
+  border-radius: 30px;
+}
+
+.times_container {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.times_container p {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.workhour {
+  padding: 1.5rem 3rem;
+  margin: 1rem;
+  background-color: #5a2164;
+  color: rgb(191, 190, 190);
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.workhour > div {
+  margin: 1rem;
+  font-size: 20px;
+  color: white;
+}

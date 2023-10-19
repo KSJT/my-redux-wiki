@@ -1,0 +1,35 @@
+.home_bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 1rem;
+  gap: 1rem;
+}
+
+.weather {
+  flex-basis: 60%;
+}
+
+.nav_bar {
+  display: flex;
+  padding: 0.8rem 2rem;
+  gap: 1rem;
+  background-color: #561562;
+  justify-content: space-around;
+}
+
+a {
+  color: black;
+}
+
+.nav_bar a {
+  color: white;
+}
+
+.nav_bar a:hover {
+  color: rgb(165, 165, 165);
+}
+
+.nav_home {
+  flex-grow: 1;
+}

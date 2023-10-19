@@ -1,0 +1,22 @@
+.timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(243, 243, 243);
+  border-radius: 10px;
+}
+
+.commute_check {
+  margin-top: 2rem;
+  font-size: 14px;
+  text-decoration-line: underline;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+  font-weight: 600;
+}
+
+.commute_check:hover {
+  scale: 1.1;
+}
