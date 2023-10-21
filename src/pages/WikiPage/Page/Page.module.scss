@@ -1,0 +1,39 @@
+.page {
+  width: 100%;
+}
+.page_info {
+  display: flex;
+  align-items: center;
+  margin-top: 0.8rem;
+  gap: 1rem;
+  padding-right: 2rem;
+}
+
+.page_info h3 {
+  flex-grow: 1;
+  padding: 1rem 3rem 0.5rem 0;
+}
+
+.page_info span {
+  font-size: 26px;
+  color: rgb(236, 97, 120);
+  padding-left: 4rem;
+}
+.page_info > div {
+  font-size: 14px;
+  padding-top: 0.8rem;
+  padding-right: 2rem;
+}
+
+.divider {
+  margin: 0 3rem;
+  border-bottom: 3px solid rgb(199, 199, 199);
+  border-radius: 5px;
+}
+
+.page_content {
+  margin: 2rem 3rem;
+  padding: 1rem;
+  font-size: 14px;
+  line-height: 1.7;
+}

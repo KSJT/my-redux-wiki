@@ -7,6 +7,7 @@ import GalleryPage from "./pages/GalleryPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ArticlePage from "./pages/WikiPage/ArticlePage/ArticlePage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="/wiki" element={<WikiPage />} />
+            <Route path="/wiki/:id" element={<ArticlePage />} />
             <Route path="/gallery" element={<GalleryPage />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />

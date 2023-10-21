@@ -1,0 +1,43 @@
+.sidebar_wrapper {
+  width: 20%;
+  height: 100%;
+  border-right: 1px solid rgb(233, 233, 233);
+}
+
+.category {
+  padding: 0.2rem 0;
+  margin: 10px 0;
+}
+
+.category p {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.1rem 1.5rem;
+  cursor: pointer;
+}
+
+.category p:hover {
+  color: #561562;
+  font-weight: 800;
+}
+
+.category ul {
+  margin: 0;
+  display: none;
+}
+
+.category .noti_show {
+  display: block;
+}
+
+.category ul li {
+  padding: 0.3rem 0.7rem;
+  margin: 0;
+  font-size: 14px;
+}
+
+.category ul li span {
+  padding: 0.2rem;
+  margin: 0;
+  vertical-align: middle;
+}

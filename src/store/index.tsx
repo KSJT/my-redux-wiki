@@ -2,12 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./user/userSlice";
 import modalReducer from "./modal/modalSlice";
 import commuteReducer from "./commute/commuteSlice";
-
+import notificationReducer from "./articles/notificationSlice";
+import notificationsReducer from "./articles/notificationsSlice";
 export const store = configureStore({
   reducer: {
     user: userReducer,
     modal: modalReducer,
     commute: commuteReducer,
+    recentNoti: notificationReducer,
+    allNotis: notificationsReducer,
   },
 });
 

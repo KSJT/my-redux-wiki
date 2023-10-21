@@ -1,0 +1,27 @@
+.noti_list {
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.noti_list:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.noti_list span {
+  color: grey;
+  font-size: 18px;
+}
+
+.noti_list h4 {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.noti_list h4:hover {
+  color: #561562;
+  font-weight: 700;
+}
