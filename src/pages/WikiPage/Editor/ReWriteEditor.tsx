@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import styles from "./ReWriteEditor.module.scss";
 import ReactQuill from "react-quill";
-import styles from "./Editor.module.scss";
 import { db } from "../../../firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../hooks/redux";
 
-const Editor = () => {
+const ReWriteEditor = () => {
   const author = useAppSelector((state) => state.user.email);
 
   const [title, setTitle] = useState("");
@@ -15,9 +16,10 @@ const Editor = () => {
     setTitle(event.currentTarget.value);
   };
 
+  const { id } = useParams();
+
   const handleSubmit = async () => {
     const timestamp = new Date().getTime().toString();
-    const id = crypto.randomUUID().toString();
 
     try {
       await setDoc(doc(db, "notification", `${id}`), {
@@ -62,4 +64,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default ReWriteEditor;

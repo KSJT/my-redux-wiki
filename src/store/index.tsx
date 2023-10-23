@@ -4,6 +4,9 @@ import modalReducer from "./modal/modalSlice";
 import commuteReducer from "./commute/commuteSlice";
 import notificationReducer from "./articles/notificationSlice";
 import notificationsReducer from "./articles/notificationsSlice";
+import currentnotiReducer from "./articles/currentnoti/CurrentnotiSlice";
+import clickednotiReducer from "./articles/categoryClicked/categoryClickedSlice";
+
 export const store = configureStore({
   reducer: {
     user: userReducer,
@@ -11,6 +14,8 @@ export const store = configureStore({
     commute: commuteReducer,
     recentNoti: notificationReducer,
     allNotis: notificationsReducer,
+    currentNoti: currentnotiReducer,
+    clickedNoti: clickednotiReducer,
   },
 });
 

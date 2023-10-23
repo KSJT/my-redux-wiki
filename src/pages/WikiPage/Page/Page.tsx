@@ -5,10 +5,12 @@ import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { useAppDispatch } from "../../../hooks/redux";
 import { getRecentNoti } from "../../../store/articles/notificationSlice";
 import { db } from "../../../firebase";
+import { Link } from "react-router-dom";
 
-const Page = ({ currentNoti }) => {
+const Page = () => {
   const dispatch = useAppDispatch();
   const recentNoti = useAppSelector((state) => state.recentNoti);
+  const currentNoti = useAppSelector((state) => state.currentNoti);
 
   const getRecentNotis = async () => {
     const docRef = collection(db, "notification");
@@ -23,14 +25,14 @@ const Page = ({ currentNoti }) => {
     getRecentNotis();
   }, []);
 
-  // current noti의 정보를 리덕스에서 가져오기
-
   return (
     <>
       <div className={styles.page}>
         <div className={styles.page_info}>
-          <span className="material-symbols-outlined">campaign</span>
-          <h3>{currentNoti ? currentNoti.title : recentNoti.title}</h3>
+          <div className={styles.page_title}>
+            <span className="material-symbols-outlined">campaign</span>
+            <h3>{currentNoti ? currentNoti.title : recentNoti.title}</h3>
+          </div>
           <div>
             작성자: {currentNoti ? currentNoti.author : recentNoti.author}
           </div>
@@ -38,6 +40,9 @@ const Page = ({ currentNoti }) => {
             작성 시각:{" "}
             {currentNoti ? currentNoti.timestamp : recentNoti.timestamp}
           </div>
+          <button className={styles.add_btn}>
+            <Link to={"/wiki/add"}>등록하기</Link>
+          </button>
         </div>
         <div className={styles.divider} />
         <div className={styles.page_content}>

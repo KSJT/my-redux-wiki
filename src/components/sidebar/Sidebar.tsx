@@ -1,35 +1,39 @@
 import React, { useState } from "react";
 import styles from "./Sidebar.module.scss";
 import Category from "../../pages/WikiPage/Category/Category";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { Link } from "react-router-dom";
+import { notiClicked } from "../../store/articles/categoryClicked/categoryClickedSlice";
 
-const Sidebar = ({ handleGetArticle }) => {
-  const [isNotiClicked, setIsNotiClicked] = useState(false);
+const Sidebar = () => {
+  const dispatch = useAppDispatch();
   const allNotis = useAppSelector((state) => state.allNotis);
 
+  const [isClicked, setIsClicked] = useState(false);
+  const openNoti = useAppSelector((state) => state.clickedNoti.isClicked);
+
   function handleClickNoti() {
-    setIsNotiClicked(!isNotiClicked);
+    dispatch(notiClicked({ isClicked: !isClicked }));
+    setIsClicked(!isClicked);
   }
 
   return (
     <div className={styles.sidebar_wrapper}>
       <div className={styles.category}>
         <p onClick={handleClickNoti}>공지사항</p>
-        <ul className={isNotiClicked ? styles.noti_show : ""}>
+        <ul className={openNoti ? styles.noti_show : ""}>
           {allNotis.map((noti) => (
-            <div key={noti.timestamp}>
+            <Link to={`/wiki/${noti.id}`} key={noti.timestamp}>
               {" "}
-              <Category noti={noti} handleGetArticle={handleGetArticle} />
-            </div>
+              <Category noti={noti} />
+            </Link>
           ))}
         </ul>
       </div>
       <div className={styles.category}>
         <p>자유게시판</p>
       </div>
-      <div className={styles.category}>
-        <p>관리자</p>
-      </div>
+      <div className={styles.category}></div>
     </div>
   );
 };

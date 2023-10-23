@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ArticlePage from "./pages/WikiPage/ArticlePage/ArticlePage";
+import ReWriteEditor from "./pages/WikiPage/Editor/ReWriteEditor";
 
 function App() {
   return (
