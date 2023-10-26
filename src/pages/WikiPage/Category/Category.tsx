@@ -6,9 +6,6 @@ import { setCurrentNoti } from "../../../store/articles/currentnoti/CurrentnotiS
 
 const Category = ({ noti }) => {
   const allNotis = useAppSelector((state) => state.allNotis);
-  // dispatch current notification // onclick
-  // useLocation id
-  // allnotis 정보 가지고 있기
 
   const { id } = useParams();
 
@@ -26,7 +23,9 @@ const Category = ({ noti }) => {
     <>
       <li className={styles.noti_list}>
         <span className="material-symbols-outlined">chevron_right</span>
-        <h4 onClick={() => handleGetArticle(noti)}>{noti.title}</h4>
+        <h4 onClick={() => handleGetArticle(noti)}>
+          {noti.title.substring(0, 13)}
+        </h4>
       </li>
     </>
   );

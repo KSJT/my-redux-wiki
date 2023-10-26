@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Timer.module.scss";
 import { useAppDispatch } from "../../../../hooks/redux";
 import {
   setCommuteTime,
   setLeaveTime,
+  setTimerOn,
 } from "../../../../store/commute/commuteSlice";
+import { useSelector } from "react-redux";
 
 const Timer = () => {
   const dispatch = useAppDispatch();
+  const timerOn = useSelector((state) => state.commute.isCommute);
 
   const [commuteTimeStamp, setCommuteTimeStamp] = useState(
     localStorage.getItem("timestamp")
@@ -23,6 +26,7 @@ const Timer = () => {
     localStorage.setItem("timestamp", timestamp);
     setCommuteTimeStamp(timestamp);
     dispatch(setCommuteTime(timestamp));
+    dispatch(setTimerOn(true));
   }
 
   function punchoutStamp() {
@@ -30,6 +34,7 @@ const Timer = () => {
     setIsCommute(false);
     const leaveStamp = new Date().getTime();
     dispatch(setLeaveTime(leaveStamp));
+    dispatch(setTimerOn(false));
   }
 
   useEffect(() => {
@@ -59,8 +64,13 @@ const Timer = () => {
     <>
       <div className={styles.timer_container}>
         <div className={styles.button_container}>
-          <button onClick={setCommuteStamp}>출근</button>
-          <button onClick={punchoutStamp}>퇴근</button>
+          {!timerOn ? (
+            <button disabled={!isCommute} onClick={setCommuteStamp}>
+              출근하기
+            </button>
+          ) : (
+            <button onClick={punchoutStamp}>퇴근하기</button>
+          )}
         </div>
         <div className={styles.timer_container}>
           <div className={styles.timer}>

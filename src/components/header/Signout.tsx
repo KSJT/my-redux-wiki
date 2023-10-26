@@ -14,6 +14,7 @@ const Signout = () => {
   const handleSignout = () => {
     signOut(auth)
       .then(() => {
+        alert("출근 기록이 사라집니다.");
         dispatch(removeUser());
         localStorage.removeItem("timestamp");
         navigate("/login");

@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ArticlePage from "./pages/WikiPage/ArticlePage/ArticlePage";
+import AddPage from "./pages/WikiPage/AddPage/AddPage";
 import ReWriteEditor from "./pages/WikiPage/Editor/ReWriteEditor";
 
 function App() {
@@ -19,8 +20,11 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="/wiki" element={<WikiPage />} />
             <Route path="/wiki/:id" element={<ArticlePage />} />
+            <Route path="/add" element={<AddPage />} />
+            <Route path="/edit/:id" element={<ReWriteEditor />} />
             <Route path="/gallery" element={<GalleryPage />} />
           </Route>
+
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<NotFoundPage />} />

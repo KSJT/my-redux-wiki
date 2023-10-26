@@ -2,8 +2,24 @@ import React, { useEffect, useState } from "react";
 import styles from "./Index.module.scss";
 import Commute from "./commute/";
 import { useAppSelector } from "../../hooks/redux";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { app } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import Carousel from "./carousel/Carousel";
 
 const HomePage = () => {
+  const auth = getAuth(app);
+  const navigate = useNavigate();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/");
+      } else {
+        navigate("/login");
+      }
+    });
+  }, []);
+
   const [isCheck, setIsCheck] = useState(false);
   const setModal = useAppSelector((state) => state.modal.isCheck);
   useEffect(() => {
@@ -15,9 +31,10 @@ const HomePage = () => {
 
   return (
     <div className={styles.home}>
-      {/* {isCheck ? <Modal /> : null} */}
       <div className={styles.grid_container}>
-        <div className={styles.item1}>1</div>
+        <div className={styles.item1}>
+          <Carousel />
+        </div>
         <div className={styles.item2}>
           <Commute />
         </div>

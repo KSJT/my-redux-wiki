@@ -5,11 +5,10 @@ import Page from "./Page/Page";
 import { db } from "../../firebase";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { getAllNotifications } from "../../store/articles/notificationsSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppDispatch } from "../../hooks/redux";
 
 const WikiPage = () => {
   const dispatch = useAppDispatch();
-  // current noti의 정보를 리덕스에서 받아오기
 
   const getNotis = async () => {
     const docRef = collection(db, "notification");

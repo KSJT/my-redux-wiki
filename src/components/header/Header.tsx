@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import Signout from "./Signout";
 import { useSelector } from "react-redux";
+import Weather from "../../pages/HomePage/weather/Weather";
 
 const Header = () => {
   const user = useSelector((state) => state.user);
   return (
     <>
       <div className={styles.home_bar}>
-        <Link to="/">
-          logo
-          <img src="" alt="" />
-        </Link>
-        <div className={styles.weather}>weather</div>
+        <Link to="/">logo</Link>
+        <div className={styles.weather}>
+          <div className={styles.weather_wrap}>
+            <Weather />
+          </div>
+        </div>
         <div>{user.email}</div>
         <Signout />
       </div>
