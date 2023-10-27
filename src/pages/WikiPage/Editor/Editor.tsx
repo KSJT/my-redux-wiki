@@ -5,6 +5,13 @@ import { db } from "../../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useAppSelector } from "../../../hooks/redux";
 import { useNavigate } from "react-router-dom";
+import { storage } from "../../../firebase";
+import {
+  getDownloadURL,
+  ref,
+  updateMetadata,
+  uploadBytes,
+} from "firebase/storage";
 
 const Editor = () => {
   const navigate = useNavigate();
@@ -13,6 +20,7 @@ const Editor = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [file, setFile] = useState(null);
+  const [url, setUrl] = useState("");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -21,20 +29,45 @@ const Editor = () => {
   const timestamp = new Date().getTime().toString();
   const id = crypto.randomUUID().toString();
 
-  const handleSubmit = async () => {
-    console.log(title, text);
+  const handleUpload = async () => {
     try {
-      await setDoc(doc(db, "notification", `${id}`), {
-        title,
-        text,
-        timestamp,
-        id,
-        author,
-      }).then((res) => alert("등록되었습니다."));
+      if (file) {
+        const storageRef = ref(storage, `notification/${id}`);
+
+        await uploadBytes(storageRef, file).then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+
+          getDownloadURL(storageRef)
+            .then((url) => {
+              setUrl(url);
+
+              const notificationData = {
+                title,
+                text,
+                timestamp,
+                author,
+                url,
+                id,
+              };
+              setDoc(doc(db, "notification", id), notificationData)
+                .then(() => {
+                  alert("등록되었습니다.");
+                  navigate("/wiki");
+                })
+                .catch((error) => {
+                  console.error("Firebase Firestore 오류:", error);
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      } else {
+        alert("파일을 선택해주세요.");
+      }
     } catch (error) {
       console.log(error);
     }
-    navigate("/wiki");
   };
 
   const modules = {
@@ -62,7 +95,7 @@ const Editor = () => {
             />
           </div>
           <div className={styles.btn_container}>
-            <button onClick={handleSubmit}>등록하기</button>
+            <button onClick={handleUpload}>등록하기</button>
           </div>
         </div>{" "}
         <input

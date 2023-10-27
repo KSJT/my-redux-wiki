@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Layout from "./components/layout/Layout";
 import WikiPage from "./pages/WikiPage";
-import GalleryPage from "./pages/GalleryPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ArticlePage from "./pages/WikiPage/ArticlePage/ArticlePage";
 import AddPage from "./pages/WikiPage/AddPage/AddPage";
 import ReWriteEditor from "./pages/WikiPage/Editor/ReWriteEditor";
+import BoardPage from "./pages/BoardPage";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
             <Route path="/wiki/:id" element={<ArticlePage />} />
             <Route path="/add" element={<AddPage />} />
             <Route path="/edit/:id" element={<ReWriteEditor />} />
-            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/board" element={<BoardPage />} />
           </Route>
 
           <Route path="/login" element={<LoginPage />} />

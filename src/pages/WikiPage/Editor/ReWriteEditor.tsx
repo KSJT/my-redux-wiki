@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ReWriteEditor.module.scss";
 import ReactQuill from "react-quill";
-import { db } from "../../../firebase";
+import { db, storage } from "../../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../../hooks/redux";
 import Sidebar from "../../../components/sidebar/Sidebar";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const ReWriteEditor = () => {
   const navigate = useNavigate();
@@ -14,8 +15,12 @@ const ReWriteEditor = () => {
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [file, setFile] = useState(null);
+
+  // get original data
 
   const [originalTimestamp, setOriginalTimestamp] = useState("");
+  const [originalUrl, setOriginalUrl] = useState("");
 
   useEffect(() => {
     getOriginData();
@@ -27,6 +32,7 @@ const ReWriteEditor = () => {
 
     if (docSnap.exists()) {
       setOriginalTimestamp(docSnap.data().timestamp);
+      setOriginalUrl(docSnap.data().url);
     } else {
       console.log("No such document!");
     }
@@ -36,23 +42,63 @@ const ReWriteEditor = () => {
     setTitle(event.target.value);
   };
 
+  // upload and change the data
+
   const { id } = useParams();
 
   const handleSubmit = async () => {
-    try {
-      await setDoc(doc(db, "notification", `${id}`), {
-        title,
-        text,
-        timestamp: originalTimestamp,
-        id,
-        author,
-      }).then((res) => alert("등록되었습니다."));
-    } catch (error) {
-      console.log(error);
-    }
+    if (!file) {
+      try {
+        await setDoc(doc(db, "notification", `${id}`), {
+          title,
+          text,
+          timestamp: originalTimestamp,
+          id,
+          author,
+          url: originalUrl,
+        }).then((res) => alert("등록되었습니다."));
+      } catch (error) {
+        console.log(error);
+      }
 
-    navigate("/wiki");
+      navigate("/wiki");
+    } else {
+      try {
+        const storageRef = ref(storage, `notification/${id}`);
+
+        await uploadBytes(storageRef, file).then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+
+          getDownloadURL(storageRef)
+            .then((url) => {
+              const notificationData = {
+                title,
+                text,
+                timestamp: originalTimestamp,
+                author,
+                url,
+                id,
+              };
+              setDoc(doc(db, "notification", id), notificationData)
+                .then(() => {
+                  alert("등록되었습니다.");
+                  navigate("/wiki");
+                })
+                .catch((error) => {
+                  console.error("Firebase Firestore 오류:", error);
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
+
+  // quill custom
 
   const modules = {
     toolbar: {
@@ -78,7 +124,12 @@ const ReWriteEditor = () => {
             />
             <button onClick={handleSubmit}>등록하기</button>
           </div>
-
+          <input
+            className={styles.file_input}
+            type="file"
+            required
+            onChange={(event) => setFile(event.target.files[0])}
+          />
           <ReactQuill
             style={{
               minWidth: "500px",

@@ -24,7 +24,7 @@ const Header = () => {
           Home
         </Link>
         <Link to="/wiki">Wiki</Link>
-        <Link to="/gallery">Gallery</Link>
+        <Link to="/board">Board</Link>
       </div>
     </>
   );

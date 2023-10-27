@@ -50,7 +50,7 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className={styles.category}>
-        <p>자유게시판</p>
+        <p>사규 및 사칙</p>
       </div>
       <div className={styles.category}></div>
     </div>
