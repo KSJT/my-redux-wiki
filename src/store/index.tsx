@@ -6,6 +6,10 @@ import notificationReducer from "./articles/notificationSlice";
 import notificationsReducer from "./articles/notificationsSlice";
 import currentnotiReducer from "./articles/currentnoti/CurrentnotiSlice";
 import clickednotiReducer from "./articles/categoryClicked/categoryClickedSlice";
+import newCategoriesReducer from "./articles/newCategory/newCategorySlice";
+import isEditCategoryReducer from "./articles/newCategory/categoryEditSlice";
+import boardArticlesReducer from "./articles/boardArticles/boardArticlesSlice";
+import allSubArticlesReducer from "./articles/subArticles/subArticles";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +20,10 @@ export const store = configureStore({
     allNotis: notificationsReducer,
     currentNoti: currentnotiReducer,
     clickedNoti: clickednotiReducer,
+    newCategories: newCategoriesReducer,
+    isEditCategory: isEditCategoryReducer,
+    boardArticles: boardArticlesReducer,
+    allSubArticles: allSubArticlesReducer,
   },
 });
 

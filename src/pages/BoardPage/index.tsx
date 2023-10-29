@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Board.module.scss";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { db } from "../../firebase";
+import { getBoardArticles } from "../../store/articles/boardArticles/boardArticlesSlice";
+import { Link } from "react-router-dom";
 
 const BoardPage = () => {
   // 데이터 역순으로 받아와서 allArticles slice 만들기
+
+  const dispatch = useAppDispatch();
+  const boardArticles = useAppSelector((state) => state.boardArticles);
+
+  useEffect(() => {
+    getAllBoardArticles();
+  }, []);
+
+  const getAllBoardArticles = async () => {
+    const docRef = collection(db, "board");
+    const q = query(docRef, orderBy("timestamp", "desc"));
+    const querySnapshot = await getDocs(q);
+
+    const boardData = [];
+    querySnapshot.forEach((doc) => {
+      boardData.push(doc.data());
+    });
+    dispatch(getBoardArticles(boardData));
+
+    console.log(boardData);
+  };
 
   const allArticles = useAppSelector((state) => state.allNotis);
   return (
@@ -21,16 +46,23 @@ const BoardPage = () => {
       <div className={styles.free_board}>
         <div className={styles.free_board_title}>
           <h3>자유 게시판</h3>
-          <button>글쓰기</button>
+          <Link to={"add"}>글쓰기</Link>
         </div>
         <div className={styles.item_container}>
-          {allArticles.map((noti) => (
-            <div key={noti.id} className={styles.item}>
-              <p>{noti.title}</p>
+          {boardArticles.map((item, index) => (
+            <Link
+              item={item}
+              to={`${item.id}`}
+              key={item.id}
+              className={styles.item}
+            >
+              <p>
+                {boardArticles.length - index + "."} {item.title}
+              </p>
               <div className={styles.item_info}>
-                <p>{noti.author}</p>
+                <p>{item.author}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className={styles.page_direction}>

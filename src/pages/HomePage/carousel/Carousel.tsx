@@ -75,7 +75,7 @@ const Carousel = () => {
   }
 
   const carouselStyle = (index: number): CarouselStyleProps => ({
-    backgroundSize: "cover",
+    backgroundSize: "contain",
     backgroundPosition: "center",
     width: "700px",
     height: "100%",
@@ -94,12 +94,11 @@ const Carousel = () => {
           >
             {allNotis.map((noti, index) => (
               <div key={noti.id}>
-                <div style={carouselStyle(index)}>
-                  <div className={styles.carousel_backdrop}></div>
-                </div>
+                <div style={carouselStyle(index)}></div>
+                <div className={styles.carousel_backdrop}></div>
                 <div className={styles.carousel_content}>
-                  <div>{noti.title}</div>
-                  <div>{parse(noti.text)}</div>
+                  <h3>{noti.title}</h3>
+                  <div>{parse(noti.text.substring(0, 50))}</div>
                 </div>
               </div>
             ))}

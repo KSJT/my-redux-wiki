@@ -33,6 +33,8 @@ const ReWriteEditor = () => {
     if (docSnap.exists()) {
       setOriginalTimestamp(docSnap.data().timestamp);
       setOriginalUrl(docSnap.data().url);
+      setText(docSnap.data().text);
+      setTitle(docSnap.data().title);
     } else {
       console.log("No such document!");
     }
@@ -120,6 +122,7 @@ const ReWriteEditor = () => {
             <input
               type="text"
               placeholder="제목"
+              value={title}
               onChange={(event) => handleTitleChange(event)}
             />
             <button onClick={handleSubmit}>등록하기</button>
@@ -139,6 +142,7 @@ const ReWriteEditor = () => {
               margin: "1rem",
             }}
             modules={modules}
+            value={text}
             onChange={setText}
           />
         </div>

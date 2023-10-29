@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import styles from "./ArticlePage.module.scss";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { db } from "../../../firebase";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { db, storage } from "../../../firebase";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
-import ReWriteEditor from "../Editor/ReWriteEditor";
 import parse from "html-react-parser";
+import { ref, deleteObject } from "firebase/storage";
 
 const ArticlePage = () => {
   const { id } = useParams();
-  const { pathname } = useLocation();
 
   const navigate = useNavigate();
 
@@ -22,7 +21,6 @@ const ArticlePage = () => {
     if (docSnap.exists()) {
       setCurrentNoti(docSnap.data());
     } else {
-      // docSnap.data() will be undefined in this case
       console.log("No such document!");
     }
   };
@@ -35,24 +33,23 @@ const ArticlePage = () => {
     setIsEdit(!isEdit);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (): Promise<void> => {
+    console.log(id);
+    const desertRef = ref(storage, `notification/${id}`);
+
+    await deleteObject(desertRef)
+      .then(() => {})
+      .catch((error) => {
+        console.log("Error removing document: ", error);
+      });
+
     await deleteDoc(doc(db, "notification", `${id}`));
-    alert("삭제되었습니다.");
+
     navigate("/wiki");
   };
 
   return (
     <>
-      {/* {id && isEdit && (
-        <div className={styles.editor_page}>
-          {" "}
-          <Sidebar />
-          <div className={styles.editor}>
-            <ReWriteEditor />
-          </div>
-        </div>
-      )} */}
-
       <div className={styles.article}>
         <Sidebar />
         <div className={styles.page}>

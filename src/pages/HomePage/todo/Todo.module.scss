@@ -1,0 +1,147 @@
+li:hover {
+  color: rgb(118, 6, 152);
+}
+
+.container {
+  min-width: 300px;
+}
+
+.todo_title {
+  display: flex;
+  padding: 0.8rem 1.1rem;
+  font-weight: 700;
+  background-color: rgb(233, 214, 250);
+  border-radius: 10px 10px 0 0;
+}
+
+.todo_title span {
+  font-size: 17px;
+  color: rgb(89, 88, 88);
+  margin-right: 0.4rem;
+}
+
+.todos {
+  color: rgb(95, 1, 95);
+  font-size: 16px;
+}
+
+.input_box {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1.5rem;
+}
+
+.input_box input {
+  border-radius: 5px;
+  width: 70%;
+  border: 1px solid rgb(67, 3, 67);
+  background-color: rgb(246, 246, 246);
+}
+
+.input_box input:focus {
+  background-color: white;
+}
+
+.add_btn {
+  width: 1.7rem;
+  height: 1.7rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add_btn:hover {
+  color: green;
+}
+
+.add_btn span {
+  font-size: 22px;
+}
+
+.edit_check {
+  background-color: transparent;
+  border: none;
+}
+
+.edit_check:hover {
+  color: green;
+}
+
+.edit_check span {
+  font-size: 22px;
+}
+
+.clear {
+  background-color: transparent;
+  border: none;
+  transition: all 0.2s;
+}
+
+.clear span {
+  font-size: 22px;
+  color: red;
+}
+
+.clear:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+
+.todos_container {
+  overflow: scroll;
+  max-height: 200px;
+  padding-bottom: 1rem;
+}
+
+.todo_item_container {
+  display: flex;
+  align-items: center;
+}
+
+.todo_item {
+  width: 75%;
+  padding: 0.2rem 1.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.todo_done {
+  width: 75%;
+  padding: 0.2rem 1.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: line-through;
+  color: rgb(163, 162, 162);
+}
+
+.todo_icons {
+  display: flex;
+  padding: 0.2rem 1rem;
+}
+
+.todo_icons button {
+  width: 1.7rem;
+  height: 1.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.todo_icons span {
+  font-size: 20px;
+  color: rgb(89, 88, 88);
+}
+
+.todo_icons span:hover {
+  color: rgb(118, 6, 152);
+}

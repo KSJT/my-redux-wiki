@@ -10,6 +10,8 @@ import ArticlePage from "./pages/WikiPage/ArticlePage/ArticlePage";
 import AddPage from "./pages/WikiPage/AddPage/AddPage";
 import ReWriteEditor from "./pages/WikiPage/Editor/ReWriteEditor";
 import BoardPage from "./pages/BoardPage";
+import BoardArticlePage from "./pages/BoardPage/BoardArticlePage";
+import BoardAddPage from "./pages/BoardPage/BoardAddPage";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Route path="/add" element={<AddPage />} />
             <Route path="/edit/:id" element={<ReWriteEditor />} />
             <Route path="/board" element={<BoardPage />} />
+            <Route path="/board/:id" element={<BoardArticlePage />} />
+            <Route path="/board/add" element={<BoardAddPage />} />
           </Route>
 
           <Route path="/login" element={<LoginPage />} />

@@ -15,14 +15,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .pinned_item {
-  width: 280px;
-  height: 100px;
-  background-color: rgb(255, 218, 224);
+  width: 25%;
+  min-height: 150px;
+  background-color: rgb(241, 241, 241);
   border-radius: 10px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .free_board {
@@ -44,7 +45,7 @@
   display: flex;
   justify-content: space-between;
   background-color: white;
-  height: 1rem;
+  height: 1.3rem;
   border-top: 1px solid rgb(221, 219, 219);
   padding: 1rem 2rem;
   line-height: 0;
@@ -59,7 +60,8 @@
 }
 
 .item p {
-  font-size: 12.5px;
+  font-size: 13px;
+  cursor: pointer;
 }
 
 .page_direction {

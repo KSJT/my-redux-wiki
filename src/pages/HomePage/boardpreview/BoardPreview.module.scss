@@ -1,0 +1,33 @@
+.container {
+  min-height: 10rem;
+}
+
+.board_title {
+  display: flex;
+  padding: 0.8rem 1.1rem;
+  font-weight: 700;
+  background-color: rgb(241, 239, 239);
+  border-radius: 10px 10px 0 0;
+}
+
+.board_title span {
+  font-size: 17px;
+  color: rgb(89, 88, 88);
+  margin-right: 0.4rem;
+}
+
+.board {
+  color: rgb(93, 10, 93);
+  font-size: 16px;
+}
+
+.title {
+  padding: 1rem 1.5rem 0.5rem;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.text {
+  padding: 0.3rem 1.5rem;
+  font-size: 12px;
+}
