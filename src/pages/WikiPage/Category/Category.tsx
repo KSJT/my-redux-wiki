@@ -27,8 +27,6 @@ const Category = ({ noti }: { noti: Noti }) => {
     });
   };
 
-  console.log(noti.title);
-
   return (
     <>
       <li className={styles.noti_list}>

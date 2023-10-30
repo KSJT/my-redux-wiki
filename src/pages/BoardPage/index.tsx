@@ -1,18 +1,73 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Board.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import { getBoardArticles } from "../../store/articles/boardArticles/boardArticlesSlice";
 import { Link } from "react-router-dom";
+import parse from "html-react-parser";
 
 const BoardPage = () => {
-  // 데이터 역순으로 받아와서 allArticles slice 만들기
-
   const dispatch = useAppDispatch();
   const boardArticles = useAppSelector((state) => state.boardArticles);
 
+  const [currentPage, setCurrentPage] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [pinnedArticles, setPinnedArticles] = useState([]);
+
+  // pagination
+
+  const total = boardArticles.length;
+  const pageLimit = 7;
+  const pages = Math.ceil(total / pageLimit);
+
+  const handlePageChange = (newPageNumber) => {
+    setPageNumber(newPageNumber);
+  };
+
+  const getDesignatedPage = (index) => {
+    const start = index * pageLimit;
+    const end = start + pageLimit;
+
+    setCurrentPage(boardArticles.slice(start, end));
+  };
+
+  // get all board articles
+
   useEffect(() => {
+    getDesignatedPage(pageNumber);
+  }, [pageNumber, pinnedArticles]);
+
+  useEffect(() => {
+    // Bring pinned articles
+    const getPinned = async () => {
+      const docRef = collection(db, "board");
+      const q = query(
+        docRef,
+        where("ispinned", "==", true),
+        orderBy("timestamp", "asc"),
+        limit(3)
+      );
+      const querySnapshot = await getDocs(q);
+
+      const pinnedData = [];
+      querySnapshot.forEach((doc) => {
+        pinnedData.push(doc.data());
+      });
+      setPinnedArticles(pinnedData);
+
+      setPageNumber(0);
+    };
+
+    getPinned();
+
     getAllBoardArticles();
   }, []);
 
@@ -26,11 +81,22 @@ const BoardPage = () => {
       boardData.push(doc.data());
     });
     dispatch(getBoardArticles(boardData));
-
-    console.log(boardData);
   };
 
-  const allArticles = useAppSelector((state) => state.allNotis);
+  // bring pinned articles
+
+  const getPinnedArticles = async () => {
+    const docRef = collection(db, "board");
+    const q = query(docRef, where("ispinned", "==", true), limit(3));
+    const querySnapshot = await getDocs(q);
+
+    const pinnedData = [];
+    querySnapshot.forEach((doc) => {
+      pinnedData.push(doc.data());
+    });
+    setPinnedArticles(pinnedData);
+  };
+
   return (
     <div className={styles.board}>
       <div className={styles.pinned_article}>
@@ -38,40 +104,68 @@ const BoardPage = () => {
           <h3>공유 게시글</h3>
         </div>
         <div className={styles.pinned_items}>
-          <div className={styles.pinned_item}>pinned article</div>
-          <div className={styles.pinned_item}>pinned article</div>
-          <div className={styles.pinned_item}>pinned article</div>
+          {pinnedArticles
+            ? pinnedArticles.map((item) => (
+                <Link
+                  to={`${item.id}`}
+                  key={item.id}
+                  className={styles.pinned_item}
+                >
+                  <div className={styles.pinned_item_title}>
+                    <span className="material-symbols-outlined">push_pin</span>
+                    {item.title}
+                  </div>
+                  <div>{parse(item.text)}</div>
+                </Link>
+              ))
+            : null}
         </div>
       </div>
       <div className={styles.free_board}>
         <div className={styles.free_board_title}>
           <h3>자유 게시판</h3>
-          <Link to={"add"}>글쓰기</Link>
+          <Link className={styles.add_btn} to={"add"}>
+            글쓰기
+          </Link>
         </div>
+
         <div className={styles.item_container}>
-          {boardArticles.map((item, index) => (
+          {currentPage.map((item, index) => (
             <Link
               item={item}
               to={`${item.id}`}
               key={item.id}
               className={styles.item}
             >
-              <p>
-                {boardArticles.length - index + "."} {item.title}
-              </p>
+              <div className={styles.item_content}>
+                {/* <p className={styles.item_number}>
+                  {boardArticles.length - index + "."}
+                </p> */}
+                <p>{item.title}</p>
+              </div>
+
               <div className={styles.item_info}>
                 <p>{item.author}</p>
               </div>
             </Link>
           ))}
         </div>
+
         <div className={styles.page_direction}>
-          <span className="material-symbols-outlined">arrow_back_ios</span>{" "}
-          <p>1</p>
-          <p>2</p>
-          <span className="material-symbols-outlined">
-            arrow_forward_ios
-          </span>{" "}
+          {/* pagination */}
+          <span>-</span>
+          <ul className={styles.pagination_page}>
+            {Array.from({ length: pages }, (_, index) => (
+              <li
+                className={styles.page}
+                onClick={() => handlePageChange(index)}
+                key={index}
+              >
+                {index + 1}
+              </li>
+            ))}
+          </ul>
+          <span>-</span>
         </div>
       </div>
     </div>

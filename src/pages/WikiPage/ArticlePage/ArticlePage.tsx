@@ -15,7 +15,7 @@ const ArticlePage = () => {
   const [currentNoti, setCurrentNoti] = useState({});
   const [isEdit, setIsEdit] = useState(false);
 
-  const docRef = doc(db, "notification", `${id}`);
+  const docRef = doc(db, "공지사항", `${id}`);
   const getCurrentNoti = async () => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -35,7 +35,7 @@ const ArticlePage = () => {
 
   const handleDelete = async (): Promise<void> => {
     console.log(id);
-    const desertRef = ref(storage, `notification/${id}`);
+    const desertRef = ref(storage, `공지사항/${id}`);
 
     await deleteObject(desertRef)
       .then(() => {})
@@ -43,7 +43,7 @@ const ArticlePage = () => {
         console.log("Error removing document: ", error);
       });
 
-    await deleteDoc(doc(db, "notification", `${id}`));
+    await deleteDoc(doc(db, "공지사항", `${id}`));
 
     navigate("/wiki");
   };
@@ -71,6 +71,14 @@ const ArticlePage = () => {
 
           <div className={styles.divider} />
           <div className={styles.page_content}>
+            <div className={styles.article_img_container}>
+              <img
+                className={styles.article_img}
+                src={currentNoti.url}
+                alt="currentNoti-img"
+              />
+            </div>
+
             <div className={styles.page_text}>
               {currentNoti.text ? parse(currentNoti.text) : ""}
             </div>

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Carousel from "./carousel/Carousel";
 import BoardPreview from "./boardpreview/BoardPreview";
 import Todo from "./todo/Todo";
+import BoardPinned from "./boardpinned/BoardPinned";
 
 const HomePage = () => {
   const auth = getAuth(app);
@@ -43,7 +44,9 @@ const HomePage = () => {
         <div className={styles.item3}>
           <Todo />
         </div>
-        <div className={styles.item4}>4</div>
+        <div className={styles.item4}>
+          <BoardPinned />
+        </div>
         <div className={styles.item5}>
           <BoardPreview />
         </div>

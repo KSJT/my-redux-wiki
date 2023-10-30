@@ -5,11 +5,6 @@
   overflow: hidden;
 }
 
-.top_container {
-  height: 100%;
-  width: 700px;
-}
-
 .carousel_container {
   height: 550px;
   display: flex;
@@ -39,6 +34,7 @@
   top: 70%;
   z-index: 99;
   padding: 2rem;
+  cursor: pointer;
 }
 
 .btn_box {

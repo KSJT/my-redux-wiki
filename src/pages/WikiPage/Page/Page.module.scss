@@ -71,3 +71,16 @@
   background-color: rgb(153, 99, 173);
   color: white;
 }
+
+.article_img_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.recentNoti_img {
+  max-width: 700px;
+  max-height: 400px;
+  padding: 50px;
+}

@@ -30,8 +30,6 @@ const Sidebar = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [categoryName, setCategoryName] = useState("");
 
-  console.log(categoryName, allNotis, allCategories);
-
   const openNoti = useAppSelector((state) => state.clickedNoti.isClicked);
 
   function handleClickNoti() {
@@ -40,7 +38,7 @@ const Sidebar = () => {
   }
 
   const getNotis = async () => {
-    const docRef = collection(db, "notification");
+    const docRef = collection(db, "공지사항");
     const q = query(docRef, orderBy("timestamp", "asc"));
     const querySnapshot = await getDocs(q);
 
@@ -108,7 +106,6 @@ const Sidebar = () => {
 
   const getSubArticleList = async (category) => {
     const docRef = collection(db, category.name);
-    // const q = query(docRef, orderBy("timestamp", "asc"));
     const querySnapshot = await getDocs(docRef);
 
     const articleData = [];

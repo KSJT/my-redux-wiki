@@ -5,9 +5,10 @@
 
 .grid_container {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 60% 40%;
   margin: 1rem 2rem;
   height: 95%;
+  overflow: scroll;
 }
 
 .grid_container > div {

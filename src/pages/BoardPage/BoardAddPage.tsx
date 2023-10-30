@@ -53,7 +53,6 @@ const BoardAddPage = () => {
   return (
     <div className={styles.page}>
       <div className={styles.input_title}>
-        {" "}
         <input
           onChange={(event) => handleChange(event)}
           type="text"

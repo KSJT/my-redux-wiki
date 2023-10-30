@@ -16,7 +16,7 @@ const Page = () => {
   const recentNoti = useAppSelector((state) => state.recentNoti);
 
   const getRecentNotis = async () => {
-    const docRef = collection(db, "notification");
+    const docRef = collection(db, "공지사항");
     const q = query(docRef, orderBy("timestamp", "desc"), limit(1));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -52,6 +52,13 @@ const Page = () => {
         </div>
         <div className={styles.divider} />
         <div className={styles.page_content}>
+          <div className={styles.article_img_container}>
+            <img
+              className={styles.recentNoti_img}
+              src={recentNoti.url}
+              alt="recentNoti-img"
+            />
+          </div>
           <div className={styles.page_text}>
             {recentNoti.text ? parse(recentNoti.text) : ""}
           </div>

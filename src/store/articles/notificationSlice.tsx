@@ -6,6 +6,7 @@ const initialState = {
   id: "",
   text: "",
   timestamp: "",
+  url: "",
 };
 export const notificationSlice = createSlice({
   name: "notification",
@@ -17,6 +18,7 @@ export const notificationSlice = createSlice({
       state.id = action.payload.id;
       state.text = action.payload.text;
       state.timestamp = action.payload.timestamp;
+      state.url = action.payload.url;
     },
   },
 });

@@ -1,48 +1,35 @@
-.container {
-  min-height: 10rem;
-  overflow: scroll;
-  max-height: 250px;
+.pinned_container {
+  cursor: pointer;
 }
 
-.board_title {
+.pinned_title {
   display: flex;
   padding: 0.8rem 1.1rem;
   font-weight: 700;
-  background-color: rgb(241, 239, 239);
+  background-color: rgb(215, 199, 244);
   border-radius: 10px 10px 0 0;
+  color: rgb(93, 10, 93);
 }
 
-.board_title span {
+.pinned_title span {
   font-size: 17px;
   color: rgb(89, 88, 88);
   margin-right: 0.4rem;
 }
 
-.board {
-  color: rgb(93, 10, 93);
-  font-size: 16px;
-}
-
-.board_content {
-}
-
-.title {
+.pinned_article_title {
   padding: 1rem 1.5rem 0.5rem;
   font-size: 14px;
   font-weight: 600;
 }
 
-.board_content:hover {
-  cursor: pointer;
-}
-
-.text {
+.pinned_article_text {
   padding: 0.3rem 1.5rem;
   font-size: 12px;
   overflow: scroll;
 }
 
-.text img {
+.pinned_article_text img {
   max-width: 200px;
   max-height: 100px;
 }

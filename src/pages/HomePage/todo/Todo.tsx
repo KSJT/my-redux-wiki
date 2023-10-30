@@ -12,18 +12,18 @@ const defaultTodo: TodoItem[] = [
 const Todo = () => {
   const [todos, setTodos] = useState<TodoItem[]>(
     localStorage.getItem("todos")
-      ? JSON.parse(localStorage.getItem("todos"))
+      ? JSON.parse(localStorage.getItem("todos")!)
       : defaultTodo
   );
   const [value, setValue] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [newTodo, setNewTodo] = useState<TodoItem>({});
+  const [newTodo, setNewTodo] = useState<TodoItem>(Object);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event?.preventDefault();
     const newTodo = {
       id: crypto.randomUUID().toString(),
@@ -58,7 +58,9 @@ const Todo = () => {
     setNewTodo(todo);
   };
 
-  const editTodo = () => {
+  const editTodo = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event?.preventDefault();
+
     const newArray = todos.map((item) => {
       if (item.id === newTodo.id) {
         return { ...item, title: value };
@@ -72,8 +74,13 @@ const Todo = () => {
   };
 
   const deleteAll = () => {
-    setTodos([]);
-    localStorage.removeItem("todos");
+    event?.preventDefault();
+    const result = confirm("모두 삭제할까요?");
+
+    if (result) {
+      setTodos([]);
+      localStorage.removeItem("todos");
+    } else return;
   };
 
   return (
@@ -95,11 +102,17 @@ const Todo = () => {
               <span className="material-symbols-outlined">add_circle</span>
             </button>
           ) : (
-            <button className={styles.edit_check} onClick={() => editTodo()}>
+            <button
+              className={styles.edit_check}
+              onClick={(event) => editTodo(event)}
+            >
               <span className="material-symbols-outlined">check_circle</span>
             </button>
           )}
-          <button onClick={() => deleteAll()} className={styles.clear}>
+          <button
+            onClick={(event) => deleteAll(event)}
+            className={styles.clear}
+          >
             <span className="material-symbols-outlined">delete_sweep</span>
           </button>
         </div>
@@ -117,7 +130,7 @@ const Todo = () => {
             </li>
 
             <div className={styles.todo_icons}>
-              <button onClick={() => handleEdit(todo)}>
+              <button onClick={(event) => handleEdit(todo)}>
                 <span className="material-symbols-outlined">edit</span>
               </button>
               <button onClick={() => handleDelete(todo.id)}>

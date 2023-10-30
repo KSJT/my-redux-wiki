@@ -27,7 +27,7 @@ const ReWriteEditor = () => {
   }, []);
 
   const getOriginData = async () => {
-    const docRef = doc(db, "notification", `${id}`);
+    const docRef = doc(db, "공지사항", `${id}`);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -51,7 +51,7 @@ const ReWriteEditor = () => {
   const handleSubmit = async () => {
     if (!file) {
       try {
-        await setDoc(doc(db, "notification", `${id}`), {
+        await setDoc(doc(db, "공지사항", `${id}`), {
           title,
           text,
           timestamp: originalTimestamp,
@@ -66,7 +66,7 @@ const ReWriteEditor = () => {
       navigate("/wiki");
     } else {
       try {
-        const storageRef = ref(storage, `notification/${id}`);
+        const storageRef = ref(storage, `공지사항/${id}`);
 
         await uploadBytes(storageRef, file).then((snapshot) => {
           console.log("Uploaded a blob or file!");
@@ -81,7 +81,7 @@ const ReWriteEditor = () => {
                 url,
                 id,
               };
-              setDoc(doc(db, "notification", id), notificationData)
+              setDoc(doc(db, "공지사항", id), notificationData)
                 .then(() => {
                   alert("등록되었습니다.");
                   navigate("/wiki");

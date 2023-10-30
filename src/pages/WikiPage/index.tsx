@@ -11,7 +11,7 @@ const WikiPage = () => {
   const dispatch = useAppDispatch();
 
   const getNotis = async () => {
-    const docRef = collection(db, "notification");
+    const docRef = collection(db, "공지사항");
     const q = query(docRef, orderBy("timestamp", "asc"));
     const querySnapshot = await getDocs(q);
 

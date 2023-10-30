@@ -5,13 +5,18 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { getAllNotifications } from "../../../store/articles/notificationsSlice";
 import parse from "html-react-parser";
+import { Link } from "react-router-dom";
 
 const Carousel = () => {
+  // carousel width
+
+  const width = (window.innerWidth * 60) / 100;
+
   // to get carousel image urls
   const allNotis = useAppSelector((state) => state.allNotis);
   const dispatch = useAppDispatch();
   const getNotis = async () => {
-    const docRef = collection(db, "notification");
+    const docRef = collection(db, "공지사항");
     const q = query(docRef, orderBy("timestamp", "asc"));
     const querySnapshot = await getDocs(q);
 
@@ -44,7 +49,7 @@ const Carousel = () => {
     }
     docRef.current = window.setTimeout(() => {
       goToNext();
-    }, 3000);
+    }, 10000);
 
     return () => {
       if (docRef.current !== null) {
@@ -60,9 +65,9 @@ const Carousel = () => {
   };
 
   const carouselContainerStyle = {
-    transform: `translateX(${-currentIndex * 700}px)`,
+    transform: `translateX(${-currentIndex * width}px)`,
     transition: `transform 0.5s ease-in-out`,
-    width: `${allNotis.length * 700}px`,
+    width: `${allNotis.length * width}px`,
   };
 
   interface CarouselStyleProps {
@@ -77,16 +82,21 @@ const Carousel = () => {
   const carouselStyle = (index: number): CarouselStyleProps => ({
     backgroundSize: "contain",
     backgroundPosition: "center",
-    width: "700px",
+    width: `${width}px`,
     height: "100%",
     backgroundRepeat: "no-repeat",
     backgroundImage: `url(${allNotis[index].url})`,
   });
 
+  const topContainerStyle = {
+    height: "100%",
+    width: `${width}px`,
+  };
+
   return (
     <>
       <div className={styles.wrapper}>
-        <div className={styles.top_container}>
+        <div style={topContainerStyle}>
           <div
             style={carouselContainerStyle}
             className={styles.carousel_container}
@@ -96,10 +106,13 @@ const Carousel = () => {
               <div key={noti.id}>
                 <div style={carouselStyle(index)}></div>
                 <div className={styles.carousel_backdrop}></div>
-                <div className={styles.carousel_content}>
+                <Link
+                  to={`/wiki/${noti.id}`}
+                  className={styles.carousel_content}
+                >
                   <h3>{noti.title}</h3>
                   <div>{parse(noti.text.substring(0, 50))}</div>
-                </div>
+                </Link>
               </div>
             ))}
           </div>

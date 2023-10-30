@@ -30,11 +30,14 @@ const Timer = () => {
   }
 
   function punchoutStamp() {
-    localStorage.removeItem("timestamp");
-    setIsCommute(false);
-    const leaveStamp = new Date().getTime();
-    dispatch(setLeaveTime(leaveStamp));
-    dispatch(setTimerOn(false));
+    const result = confirm("출퇴근 기록이 삭제됩니다. 퇴근할까요?");
+    if (result) {
+      localStorage.removeItem("timestamp");
+      setIsCommute(false);
+      const leaveStamp = new Date().getTime();
+      dispatch(setLeaveTime(leaveStamp));
+      dispatch(setTimerOn(false));
+    } else return;
   }
 
   useEffect(() => {

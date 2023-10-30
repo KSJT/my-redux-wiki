@@ -19,8 +19,6 @@ const Editor = () => {
   const [url, setUrl] = useState("");
   const [select, setSelect] = useState("");
 
-  console.log(select);
-
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
