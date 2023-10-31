@@ -4,6 +4,13 @@ import modalReducer from "./modal/modalSlice";
 import commuteReducer from "./commute/commuteSlice";
 import notificationReducer from "./articles/notificationSlice";
 import notificationsReducer from "./articles/notificationsSlice";
+import currentnotiReducer from "./articles/currentnoti/CurrentnotiSlice";
+import clickednotiReducer from "./articles/categoryClicked/categoryClickedSlice";
+import newCategoriesReducer from "./articles/newCategory/newCategorySlice";
+import isEditCategoryReducer from "./articles/newCategory/categoryEditSlice";
+import boardArticlesReducer from "./articles/boardArticles/boardArticlesSlice";
+import allSubArticlesReducer from "./articles/subArticles/subArticles";
+
 export const store = configureStore({
   reducer: {
     user: userReducer,
@@ -11,6 +18,12 @@ export const store = configureStore({
     commute: commuteReducer,
     recentNoti: notificationReducer,
     allNotis: notificationsReducer,
+    currentNoti: currentnotiReducer,
+    clickedNoti: clickednotiReducer,
+    newCategories: newCategoriesReducer,
+    isEditCategory: isEditCategoryReducer,
+    boardArticles: boardArticlesReducer,
+    allSubArticles: allSubArticlesReducer,
   },
 });
 

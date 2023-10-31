@@ -1,0 +1,21 @@
+.category {
+  padding: 0.2rem 0;
+  margin: 10px 0;
+}
+
+.category p {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.1rem 1.5rem;
+  cursor: pointer;
+}
+
+.category p:hover {
+  color: #561562;
+  font-weight: 800;
+}
+
+.category ul {
+  margin: 0;
+  display: none;
+}

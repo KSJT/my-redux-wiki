@@ -1,26 +1,28 @@
 .timer_container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   margin: 0;
+  width: 100%;
 }
 
 .button_container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.7rem;
-  width: 30%;
+  width: 80%;
 }
 
 .button_container button {
   border: none;
-  border-radius: 10px;
-  padding: 0.5rem;
-  background-color: rgb(247, 191, 253);
+  border-radius: 20px;
+  height: 2.5rem;
+  background-color: rgb(156, 110, 242);
   transition: 0.2s ease-in-out;
-  font-weight: 600;
-  width: 50px;
+  font-weight: 500;
+  font-size: 16px;
+  width: 100%;
+  color: rgb(36, 36, 36);
+  cursor: pointer;
 }
 
 .button_container button:hover {
@@ -30,11 +32,10 @@
 }
 
 .timer_container {
-  width: 70%;
+  width: 80%;
 }
 
 .timer {
-  margin: 1rem;
   font-size: 38px;
   font-weight: 600;
   display: flex;

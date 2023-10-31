@@ -1,0 +1,106 @@
+.page {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 4rem;
+}
+
+.article_top_container {
+  display: flex;
+  justify-content: start;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.article_top {
+  width: 80%;
+}
+
+.article_title_box {
+  display: flex;
+}
+
+.article_title_box h2 {
+  line-height: 1.5;
+}
+
+.article_title_box button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.article_title_box button:hover {
+  color: purple;
+}
+
+button.pinned {
+  color: purple;
+}
+
+button.unpinned {
+  color: grey;
+}
+
+.article_title_box span {
+  font-weight: 800;
+}
+
+.article_title {
+  margin: 0 1rem 2rem;
+}
+
+.title_info {
+  display: flex;
+  font-size: 14px;
+  gap: 6rem;
+  padding: 1rem;
+  justify-content: start;
+  line-height: 2;
+}
+
+.divider {
+  border-bottom: 3px solid rgb(199, 199, 199);
+  border-radius: 5px;
+}
+
+.btn_box {
+  margin: 2rem 0;
+  line-height: 8;
+}
+
+.btn_box button {
+  margin: 0 1rem;
+  width: 3rem;
+  height: 1.8rem;
+}
+
+.article_content {
+  margin: 2rem 0.5rem;
+}
+
+.article_content img {
+  max-width: 900px;
+  max-height: 800px;
+}
+
+.back_btn {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  cursor: pointer;
+  color: purple;
+  font-weight: 600;
+  width: 150px;
+}
+
+.back_btn span {
+  font-size: 18px;
+  padding: 0 0.5rem;
+}
+
+.back_btn:hover {
+  color: grey;
+}

@@ -10,7 +10,7 @@ const commuteSlice = createSlice({
   name: "commute",
   initialState: initialState,
   reducers: {
-    setIsCommute: (state, action) => {
+    setTimerOn: (state, action) => {
       state.isCommute = action.payload;
     },
     setCommuteTime: (state, action) => {
@@ -22,6 +22,6 @@ const commuteSlice = createSlice({
   },
 });
 
-export const { setIsCommute, setCommuteTime, setLeaveTime } =
+export const { setTimerOn, setCommuteTime, setLeaveTime } =
   commuteSlice.actions;
 export default commuteSlice.reducer;

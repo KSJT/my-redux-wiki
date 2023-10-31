@@ -1,17 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Page.module.scss";
 import { useAppSelector } from "../../../hooks/redux";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { useAppDispatch } from "../../../hooks/redux";
 import { getRecentNoti } from "../../../store/articles/notificationSlice";
 import { db } from "../../../firebase";
+import { Link } from "react-router-dom";
+import parse from "html-react-parser";
+import dayjs from "dayjs";
 
-const Page = ({ currentNoti }) => {
+const Page = () => {
+  const [isEdit, setIsEdit] = useState(false);
+
   const dispatch = useAppDispatch();
   const recentNoti = useAppSelector((state) => state.recentNoti);
 
   const getRecentNotis = async () => {
-    const docRef = collection(db, "notification");
+    const docRef = collection(db, "공지사항");
     const q = query(docRef, orderBy("timestamp", "desc"), limit(1));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -23,25 +28,40 @@ const Page = ({ currentNoti }) => {
     getRecentNotis();
   }, []);
 
-  // current noti의 정보를 리덕스에서 가져오기
+  const handleAddArticle = () => {
+    setIsEdit(!isEdit);
+  };
 
   return (
     <>
       <div className={styles.page}>
         <div className={styles.page_info}>
-          <span className="material-symbols-outlined">campaign</span>
-          <h3>{currentNoti ? currentNoti.title : recentNoti.title}</h3>
-          <div>
-            작성자: {currentNoti ? currentNoti.author : recentNoti.author}
+          <div className={styles.page_title}>
+            <span className="material-symbols-outlined">campaign</span>
+            <h3>{recentNoti.title}</h3>
           </div>
-          <div>
-            작성 시각:{" "}
-            {currentNoti ? currentNoti.timestamp : recentNoti.timestamp}
-          </div>
+          <div>작성자: {recentNoti.author}</div>
+          <div>작성 시각: {recentNoti.timestamp}</div>
+          <Link
+            to={"/add"}
+            className={styles.add_btn}
+            onClick={handleAddArticle}
+          >
+            등록하기
+          </Link>
         </div>
         <div className={styles.divider} />
         <div className={styles.page_content}>
-          <div>{currentNoti ? currentNoti.text : recentNoti.text}</div>
+          <div className={styles.article_img_container}>
+            <img
+              className={styles.recentNoti_img}
+              src={recentNoti.url}
+              alt="recentNoti-img"
+            />
+            <div className={styles.page_text}>
+              {recentNoti.text ? parse(recentNoti.text) : ""}
+            </div>
+          </div>
         </div>
       </div>
     </>
