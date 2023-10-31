@@ -28,11 +28,11 @@ const BoardPage = () => {
   const pageLimit = 7;
   const pages = Math.ceil(total / pageLimit);
 
-  const handlePageChange = (newPageNumber) => {
+  const handlePageChange = (newPageNumber: number) => {
     setPageNumber(newPageNumber);
   };
 
-  const getDesignatedPage = (index) => {
+  const getDesignatedPage = (index: number) => {
     const start = index * pageLimit;
     const end = start + pageLimit;
 

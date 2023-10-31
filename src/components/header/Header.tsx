@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import Signout from "./Signout";
-import { useSelector } from "react-redux";
 import Weather from "../../pages/HomePage/weather/Weather";
+import { useAppSelector } from "../../hooks/redux";
 
 const Header = () => {
-  const user = useSelector((state) => state.user);
+  const user = useAppSelector((state) => state.user);
   return (
     <>
       <div className={styles.home_bar}>

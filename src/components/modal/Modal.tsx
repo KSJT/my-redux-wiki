@@ -5,13 +5,14 @@ import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { setModal } from "../../store/modal/modalSlice";
 
 const Modal = () => {
-  const commuteStamp = useAppSelector((state) => state.commute.commuteTime);
-  const leaveStamp = useAppSelector((state) => state.commute.leaveTime);
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = ("0" + (now.getMonth() + 1)).slice(-2);
-  const day = ("0" + now.getDate()).slice(-2);
-  const dateString = year + "." + month + "." + day + ".";
+  const isCheck = useAppSelector((state) => state.modal.isCheck);
+  const isCommute = useAppSelector((state) => state.commute);
+
+  const commuteStampString = localStorage.getItem("commuteStamp");
+  const commuteStamp = JSON.parse(commuteStampString)?.commuteTimeStamp;
+
+  const leaveStampString = localStorage.getItem("leaveStamp");
+  const leaveStamp = JSON.parse(leaveStampString)?.puchoutTimeStamp;
 
   const commuteTime = new Date(commuteStamp).toLocaleTimeString();
   const leaveTime = new Date(leaveStamp).toLocaleTimeString();
@@ -31,10 +32,14 @@ const Modal = () => {
   const timeObject = millisecondsToTime(workStamp);
   const workhour = `${timeObject.hours} 시간 ${timeObject.minutes} 분 ${timeObject.seconds} 초`;
 
-  const isCheck = useAppSelector((state) => state.modal.isCheck);
-
   const modalRef = useRef(null);
   useOnClickOutside(modalRef);
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = ("0" + (now.getMonth() + 1)).slice(-2);
+  const day = ("0" + now.getDate()).slice(-2);
+  const dateString = year + "." + month + "." + day + ".";
 
   return (
     <>
@@ -61,13 +66,17 @@ const Modal = () => {
                   style={{ display: "flex", alignItems: "center", gap: "1rem" }}
                 >
                   <p>출근</p>
-                  <div>{commuteTime}</div>
+                  <div>
+                    {!isCommute && !commuteStamp
+                      ? "출근 기록이 없습니다."
+                      : commuteTime}
+                  </div>
                 </div>
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "1rem" }}
                 >
                   <p>퇴근</p>
-                  <div>{leaveTime}</div>
+                  <div>{!leaveStamp ? "퇴근 기록이 없습니다." : leaveTime}</div>
                 </div>
               </div>
             </div>

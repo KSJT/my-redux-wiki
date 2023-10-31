@@ -14,16 +14,6 @@
   padding: 2rem;
 }
 
-.carousel_backdrop {
-  position: absolute;
-  top: 70%;
-  width: 700px;
-  height: 30%;
-  opacity: 0.5;
-  background-color: white;
-  border-radius: 30px;
-}
-
 .carousel_content {
   padding: 1rem;
   width: 100%;
@@ -60,4 +50,7 @@
   background-color: rgb(67, 6, 108);
   width: 1.8rem;
   margin: 0 0.2rem;
+}
+
+.carousel_text {
 }

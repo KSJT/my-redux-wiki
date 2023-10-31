@@ -13,7 +13,7 @@ const Timer = () => {
   const timerOn = useSelector((state) => state.commute.isCommute);
 
   const [commuteTimeStamp, setCommuteTimeStamp] = useState(
-    localStorage.getItem("timestamp")
+    JSON.parse(localStorage.getItem("commuteStamp"))
   );
   const [isCommute, setIsCommute] = useState(true);
 
@@ -23,25 +23,42 @@ const Timer = () => {
 
   function setCommuteStamp() {
     const timestamp = new Date().getTime();
-    localStorage.setItem("timestamp", timestamp);
+    const currentDate = new Date(timestamp);
+
+    const expirationDate = dayString(currentDate);
+    const data = {
+      commuteTimeStamp: timestamp,
+      expirationDate,
+    };
+    localStorage.setItem("commuteStamp", JSON.stringify(data));
+
     setCommuteTimeStamp(timestamp);
     dispatch(setCommuteTime(timestamp));
     dispatch(setTimerOn(true));
   }
 
   function punchoutStamp() {
-    const result = confirm("출퇴근 기록이 삭제됩니다. 퇴근할까요?");
+    const result = confirm("출근은 한 번만 할 수 있습니다. 퇴근할까요?");
     if (result) {
-      localStorage.removeItem("timestamp");
       setIsCommute(false);
-      const leaveStamp = new Date().getTime();
-      dispatch(setLeaveTime(leaveStamp));
+
+      const timestamp = new Date().getTime();
+      const currentDate = new Date(timestamp);
+
+      const expirationDate = dayString(currentDate);
+      const data = {
+        puchoutTimeStamp: timestamp,
+        expirationDate,
+      };
+      localStorage.setItem("leaveStamp", JSON.stringify(data));
+
+      dispatch(setLeaveTime(timestamp));
       dispatch(setTimerOn(false));
     } else return;
   }
 
   useEffect(() => {
-    if (!commuteTimeStamp || !isCommute) {
+    if (!commuteTimeStamp || !timerOn) {
       return;
     } else {
       const time = setInterval(() => {
@@ -63,12 +80,22 @@ const Timer = () => {
     }
   }, [commuteTimeStamp, isCommute]);
 
+  // expirationDate
+
+  const dayString = (currentDate) => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1;
+    const day = currentDate.getDate();
+    const expiration = year + "-" + month + "-" + day + "T23:59:59";
+    return expiration;
+  };
+
   return (
     <>
       <div className={styles.timer_container}>
         <div className={styles.button_container}>
           {!timerOn ? (
-            <button disabled={!isCommute} onClick={setCommuteStamp}>
+            <button disabled={commuteTimeStamp} onClick={setCommuteStamp}>
               출근하기
             </button>
           ) : (

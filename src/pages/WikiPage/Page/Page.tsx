@@ -58,9 +58,9 @@ const Page = () => {
               src={recentNoti.url}
               alt="recentNoti-img"
             />
-          </div>
-          <div className={styles.page_text}>
-            {recentNoti.text ? parse(recentNoti.text) : ""}
+            <div className={styles.page_text}>
+              {recentNoti.text ? parse(recentNoti.text) : ""}
+            </div>
           </div>
         </div>
       </div>

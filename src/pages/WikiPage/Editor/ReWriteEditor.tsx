@@ -127,12 +127,13 @@ const ReWriteEditor = () => {
             />
             <button onClick={handleSubmit}>등록하기</button>
           </div>
-          <input
-            className={styles.file_input}
-            type="file"
-            required
-            onChange={(event) => setFile(event.target.files[0])}
-          />
+          <div className={styles.file_input}>
+            <input
+              type="file"
+              required
+              onChange={(event) => setFile(event.target.files[0])}
+            />
+          </div>
           <ReactQuill
             style={{
               minWidth: "500px",

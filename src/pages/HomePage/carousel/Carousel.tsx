@@ -93,6 +93,16 @@ const Carousel = () => {
     width: `${width}px`,
   };
 
+  const backdropStyle = {
+    position: "absolute",
+    top: "70%",
+    width: `${width}px`,
+    height: "30%",
+    opacity: "0.5",
+    backgroundColor: "white",
+    borderRadius: "30px",
+  };
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -105,13 +115,15 @@ const Carousel = () => {
             {allNotis.map((noti, index) => (
               <div key={noti.id}>
                 <div style={carouselStyle(index)}></div>
-                <div className={styles.carousel_backdrop}></div>
+                <div style={backdropStyle}></div>
                 <Link
                   to={`/wiki/${noti.id}`}
                   className={styles.carousel_content}
                 >
                   <h3>{noti.title}</h3>
-                  <div>{parse(noti.text.substring(0, 50))}</div>
+                  <div className={styles.carousel_text}>
+                    {parse(noti.text.substring(0, 30))}
+                  </div>
                 </Link>
               </div>
             ))}

@@ -78,7 +78,6 @@ const ArticlePage = () => {
                 alt="currentNoti-img"
               />
             </div>
-
             <div className={styles.page_text}>
               {currentNoti.text ? parse(currentNoti.text) : ""}
             </div>
