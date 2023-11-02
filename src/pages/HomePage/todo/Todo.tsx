@@ -41,7 +41,7 @@ const Todo = () => {
     localStorage.setItem("todos", JSON.stringify(newArray));
   };
 
-  const handleDone = (todo) => {
+  const handleDone = (todo: TodoItem) => {
     const newArray = todos.map((item) => {
       if (item.id === todo.id) {
         return { ...item, done: !item.done };
@@ -52,7 +52,7 @@ const Todo = () => {
     localStorage.setItem("todos", JSON.stringify(newArray));
   };
 
-  const handleEdit = (todo) => {
+  const handleEdit = (todo: TodoItem) => {
     setValue(todo.title);
     setIsEditing(!isEditing);
     setNewTodo(todo);
@@ -109,10 +109,7 @@ const Todo = () => {
               <span className="material-symbols-outlined">check_circle</span>
             </button>
           )}
-          <button
-            onClick={(event) => deleteAll(event)}
-            className={styles.clear}
-          >
+          <button onClick={() => deleteAll()} className={styles.clear}>
             <span className="material-symbols-outlined">delete_sweep</span>
           </button>
         </div>

@@ -42,7 +42,7 @@ const Sidebar = () => {
     const q = query(docRef, orderBy("timestamp", "asc"));
     const querySnapshot = await getDocs(q);
 
-    const notificationsData = [];
+    const notificationsData: any = [];
     querySnapshot.forEach((doc) => {
       notificationsData.push(doc.data());
     });
@@ -67,7 +67,7 @@ const Sidebar = () => {
     const q = query(docRef, orderBy("timestamp", "asc"));
     const querySnapshot = await getDocs(q);
 
-    const categories = [];
+    const categories: any = [];
     querySnapshot.forEach((doc) => {
       categories.push(doc.data());
     });
@@ -76,7 +76,9 @@ const Sidebar = () => {
 
   // add categories
 
-  const handleChangeCategoryName = (event) => {
+  const handleChangeCategoryName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setCategoryName(event.target.value);
   };
 
@@ -104,11 +106,11 @@ const Sidebar = () => {
       });
   };
 
-  const getSubArticleList = async (category) => {
+  const getSubArticleList = async (category: any) => {
     const docRef = collection(db, category.name);
     const querySnapshot = await getDocs(docRef);
 
-    const articleData = [];
+    const articleData: any = [];
     querySnapshot.forEach((doc) => {
       articleData.push(doc.data());
     });
@@ -121,7 +123,7 @@ const Sidebar = () => {
       <div className={styles.category}>
         <p onClick={handleClickNoti}>공지사항</p>
         <ul className={openNoti ? styles.noti_show : ""}>
-          {allNotis.map((noti) => (
+          {allNotis.map((noti: any) => (
             <Link to={`/wiki/${noti.id}`} key={noti.timestamp}>
               {" "}
               <Category noti={noti} />
@@ -133,7 +135,7 @@ const Sidebar = () => {
       {/* bring other category */}
       <div>
         {allCategories
-          ? allCategories.map((category) => (
+          ? allCategories.map((category: any) => (
               <NewCategory
                 getSubArticleList={() => getSubArticleList(category)}
                 key={category.id}

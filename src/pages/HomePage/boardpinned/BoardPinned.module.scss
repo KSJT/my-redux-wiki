@@ -1,5 +1,7 @@
 .pinned_container {
   cursor: pointer;
+  max-height: 250px;
+  overflow-y: scroll;
 }
 
 .pinned_title {

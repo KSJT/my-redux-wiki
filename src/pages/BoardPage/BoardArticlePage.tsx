@@ -10,8 +10,8 @@ const BoardArticlePage = () => {
 
   const navigate = useNavigate();
 
-  const [article, setArticle] = useState({});
-  const [pinned, setPinned] = useState(false);
+  const [article, setArticle] = useState<any>({});
+  const [pinned, setPinned] = useState<boolean>(false);
 
   const docRef = doc(db, "board", `${id}`);
   const getArticle = async () => {

@@ -13,14 +13,14 @@ import styles from "./BoardPinned.module.scss";
 import { Link } from "react-router-dom";
 
 const BoardPinned = () => {
-  const [recentPinned, setRecentPinned] = useState({});
+  const [recentPinned, setRecentPinned] = useState<any>({});
 
   const getPinnedArticle = async () => {
     const docRef = collection(db, "board");
     const q = query(
       docRef,
       where("ispinned", "==", true),
-      orderBy("timestamp", "asc"),
+      orderBy("timestamp", "desc"),
       limit(1)
     );
     const querySnapshot = await getDocs(q);

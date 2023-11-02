@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Page.module.scss";
 import { useAppSelector } from "../../../hooks/redux";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
@@ -7,7 +7,6 @@ import { getRecentNoti } from "../../../store/articles/notificationSlice";
 import { db } from "../../../firebase";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
-import dayjs from "dayjs";
 
 const Page = () => {
   const [isEdit, setIsEdit] = useState(false);

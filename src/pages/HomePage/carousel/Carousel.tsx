@@ -13,14 +13,25 @@ const Carousel = () => {
   const width = (window.innerWidth * 60) / 100;
 
   // to get carousel image urls
-  const allNotis = useAppSelector((state) => state.allNotis);
+
+  interface AllNotis {
+    author: string;
+    id: string;
+    title: string;
+    text: string;
+    url: string;
+    timestamp: number;
+  }
+
+  const allNotis: AllNotis[] = useAppSelector((state) => state.allNotis);
+
   const dispatch = useAppDispatch();
   const getNotis = async () => {
     const docRef = collection(db, "공지사항");
     const q = query(docRef, orderBy("timestamp", "asc"));
     const querySnapshot = await getDocs(q);
 
-    const notificationsData = [];
+    const notificationsData: any = [];
     querySnapshot.forEach((doc) => {
       notificationsData.push(doc.data());
     });
@@ -93,7 +104,7 @@ const Carousel = () => {
     width: `${width}px`,
   };
 
-  const backdropStyle = {
+  const backdropStyle: any = {
     position: "absolute",
     top: "70%",
     width: `${width}px`,
@@ -112,7 +123,7 @@ const Carousel = () => {
             className={styles.carousel_container}
             ref={carouselRef}
           >
-            {allNotis.map((noti, index) => (
+            {allNotis.map((noti: any, index) => (
               <div key={noti.id}>
                 <div style={carouselStyle(index)}></div>
                 <div style={backdropStyle}></div>

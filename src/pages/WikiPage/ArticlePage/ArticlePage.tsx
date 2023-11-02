@@ -12,7 +12,7 @@ const ArticlePage = () => {
 
   const navigate = useNavigate();
 
-  const [currentNoti, setCurrentNoti] = useState({});
+  const [currentNoti, setCurrentNoti] = useState<any>({});
   const [isEdit, setIsEdit] = useState(false);
 
   const docRef = doc(db, "공지사항", `${id}`);
@@ -70,14 +70,14 @@ const ArticlePage = () => {
           </div>
 
           <div className={styles.divider} />
+          <div className={styles.article_img_container}>
+            <img
+              className={styles.article_img}
+              src={currentNoti.url}
+              alt="currentNoti-img"
+            />
+          </div>
           <div className={styles.page_content}>
-            <div className={styles.article_img_container}>
-              <img
-                className={styles.article_img}
-                src={currentNoti.url}
-                alt="currentNoti-img"
-              />
-            </div>
             <div className={styles.page_text}>
               {currentNoti.text ? parse(currentNoti.text) : ""}
             </div>

@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+import { RefObject, useEffect } from "react";
 import { useAppDispatch } from "./redux";
 import { setModal } from "../store/modal/modalSlice";
 
-export default function useOnClickOutside(ref) {
+export default function useOnClickOutside(ref: RefObject<HTMLElement>) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const listener = (event) => {
-      if (!ref.current || ref.current.contains(event.target)) {
+    const listener = (event: MouseEvent | TouchEvent) => {
+      if (!ref.current || ref.current.contains(event.target as Node)) {
         return;
       }
       dispatch(setModal({ isCheck: false }));

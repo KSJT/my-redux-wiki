@@ -12,7 +12,7 @@ const BoardAddPage = () => {
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
