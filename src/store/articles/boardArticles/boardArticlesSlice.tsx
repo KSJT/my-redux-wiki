@@ -4,7 +4,7 @@ const boardArticles = createSlice({
   name: "boardAarticles",
   initialState: [],
   reducers: {
-    getBoardArticles: (state, action) => {
+    getBoardArticles: (_, action) => {
       return action.payload;
     },
   },

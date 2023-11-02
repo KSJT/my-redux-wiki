@@ -13,7 +13,6 @@ import { db } from "../../firebase";
 import { getBoardArticles } from "../../store/articles/boardArticles/boardArticlesSlice";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
-import { BoardArticle } from "../../Type";
 
 const BoardPage = () => {
   const dispatch = useAppDispatch();
@@ -117,7 +116,7 @@ const BoardPage = () => {
         </div>
 
         <div className={styles.item_container}>
-          {currentPage.map((item: any, index) => (
+          {currentPage.map((item: any) => (
             <Link to={`${item.id}`} key={item.id} className={styles.item}>
               <div className={styles.item_content}>
                 {/* <p className={styles.item_number}>

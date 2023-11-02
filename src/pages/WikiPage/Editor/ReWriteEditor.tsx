@@ -7,7 +7,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../../hooks/redux";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import parse from "html-react-parser";
 
 const ReWriteEditor = () => {
   const navigate = useNavigate();
@@ -59,7 +58,7 @@ const ReWriteEditor = () => {
           id,
           author,
           url: originalUrl,
-        }).then((res) => alert("등록되었습니다."));
+        }).then(() => alert("등록되었습니다."));
       } catch (error) {
         console.log(error);
       }
@@ -69,7 +68,7 @@ const ReWriteEditor = () => {
       try {
         const storageRef = ref(storage, `공지사항/${id}`);
 
-        await uploadBytes(storageRef, file).then((snapshot) => {
+        await uploadBytes(storageRef, file).then(() => {
           console.log("Uploaded a blob or file!");
 
           getDownloadURL(storageRef)

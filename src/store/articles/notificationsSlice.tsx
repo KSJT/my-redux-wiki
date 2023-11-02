@@ -4,7 +4,7 @@ export const notificationsSlice = createSlice({
   name: "notifications",
   initialState: [],
   reducers: {
-    getAllNotifications: (state, action) => {
+    getAllNotifications: (_, action) => {
       return action.payload;
     },
   },

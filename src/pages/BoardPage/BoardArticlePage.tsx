@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./BoardArticlePage.module.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";

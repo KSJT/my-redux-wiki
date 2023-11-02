@@ -127,7 +127,7 @@ const Todo = () => {
             </li>
 
             <div className={styles.todo_icons}>
-              <button onClick={(event) => handleEdit(todo)}>
+              <button onClick={() => handleEdit(todo)}>
                 <span className="material-symbols-outlined">edit</span>
               </button>
               <button onClick={() => handleDelete(todo.id)}>

@@ -4,7 +4,7 @@ export const newCategories = createSlice({
   name: "newCategories",
   initialState: [],
   reducers: {
-    addNewCategory: (state, action) => {
+    addNewCategory: (_, action) => {
       return action.payload;
     },
   },

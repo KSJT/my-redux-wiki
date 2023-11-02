@@ -31,7 +31,7 @@ const Editor = () => {
       if (file) {
         const storageRef = ref(storage, `${select}/${id}`);
 
-        await uploadBytes(storageRef, file).then((snapshot) => {
+        await uploadBytes(storageRef, file).then(() => {
           console.log("Uploaded a blob or file!");
 
           getDownloadURL(storageRef)
