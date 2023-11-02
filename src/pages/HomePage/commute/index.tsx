@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Timer from "./timer/Timer";
 import styles from "./Commute.module.scss";
 import { useAppDispatch } from "../../../hooks/redux";

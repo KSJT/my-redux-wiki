@@ -13,6 +13,7 @@ import { db } from "../../firebase";
 import { getBoardArticles } from "../../store/articles/boardArticles/boardArticlesSlice";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
+import { BoardArticle } from "../../Type";
 
 const BoardPage = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ const BoardPage = () => {
 
   const [currentPage, setCurrentPage] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-  const [pinnedArticles, setPinnedArticles] = useState([]);
+  const [pinnedArticles, setPinnedArticles] = useState<any>([]);
 
   // pagination
 
@@ -52,12 +53,12 @@ const BoardPage = () => {
       const q = query(
         docRef,
         where("ispinned", "==", true),
-        orderBy("timestamp", "asc"),
+        orderBy("timestamp", "desc"),
         limit(3)
       );
       const querySnapshot = await getDocs(q);
 
-      const pinnedData = [];
+      const pinnedData: any = [];
       querySnapshot.forEach((doc) => {
         pinnedData.push(doc.data());
       });
@@ -76,25 +77,11 @@ const BoardPage = () => {
     const q = query(docRef, orderBy("timestamp", "desc"));
     const querySnapshot = await getDocs(q);
 
-    const boardData = [];
+    const boardData: any = [];
     querySnapshot.forEach((doc) => {
       boardData.push(doc.data());
     });
     dispatch(getBoardArticles(boardData));
-  };
-
-  // bring pinned articles
-
-  const getPinnedArticles = async () => {
-    const docRef = collection(db, "board");
-    const q = query(docRef, where("ispinned", "==", true), limit(3));
-    const querySnapshot = await getDocs(q);
-
-    const pinnedData = [];
-    querySnapshot.forEach((doc) => {
-      pinnedData.push(doc.data());
-    });
-    setPinnedArticles(pinnedData);
   };
 
   return (
@@ -105,7 +92,7 @@ const BoardPage = () => {
         </div>
         <div className={styles.pinned_items}>
           {pinnedArticles
-            ? pinnedArticles.map((item) => (
+            ? pinnedArticles.map((item: any) => (
                 <Link
                   to={`${item.id}`}
                   key={item.id}
@@ -130,13 +117,8 @@ const BoardPage = () => {
         </div>
 
         <div className={styles.item_container}>
-          {currentPage.map((item, index) => (
-            <Link
-              item={item}
-              to={`${item.id}`}
-              key={item.id}
-              className={styles.item}
-            >
+          {currentPage.map((item: any, index) => (
+            <Link to={`${item.id}`} key={item.id} className={styles.item}>
               <div className={styles.item_content}>
                 {/* <p className={styles.item_number}>
                   {boardArticles.length - index + "."}

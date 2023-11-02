@@ -8,17 +8,22 @@ const Modal = () => {
   const isCheck = useAppSelector((state) => state.modal.isCheck);
   const isCommute = useAppSelector((state) => state.commute);
 
-  const commuteStampString = localStorage.getItem("commuteStamp");
+  interface CommuteData {
+    commuteStamp: number;
+    expirationDate: string;
+  }
+
+  const commuteStampString: any = localStorage.getItem("commuteStamp");
   const commuteStamp = JSON.parse(commuteStampString)?.commuteTimeStamp;
 
-  const leaveStampString = localStorage.getItem("leaveStamp");
+  const leaveStampString: any = localStorage.getItem("leaveStamp");
   const leaveStamp = JSON.parse(leaveStampString)?.puchoutTimeStamp;
 
   const commuteTime = new Date(commuteStamp).toLocaleTimeString();
   const leaveTime = new Date(leaveStamp).toLocaleTimeString();
   const workStamp = leaveStamp - commuteStamp;
 
-  function millisecondsToTime(workStamp) {
+  function millisecondsToTime(workStamp: number) {
     const seconds = Math.floor((workStamp / 1000) % 60);
     const minutes = Math.floor((workStamp / (1000 * 60)) % 60);
     const hours = Math.floor((workStamp / (1000 * 60 * 60)) % 24);

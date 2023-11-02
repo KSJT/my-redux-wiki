@@ -1,7 +1,5 @@
-import React from "react";
 import styles from "./Category.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
-import { useParams } from "react-router-dom";
 import { setCurrentNoti } from "../../../store/articles/currentnoti/CurrentnotiSlice";
 
 interface Noti {
@@ -14,8 +12,6 @@ interface Noti {
 
 const Category = ({ noti }: { noti: Noti }) => {
   const allNotis = useAppSelector((state) => state.allNotis);
-
-  const { id } = useParams();
 
   const dispatch = useAppDispatch();
 

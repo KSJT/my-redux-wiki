@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ReWriteEditor.module.scss";
 import ReactQuill from "react-quill";
 import { db, storage } from "../../../firebase";
@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../../hooks/redux";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import parse from "html-react-parser";
 
 const ReWriteEditor = () => {
   const navigate = useNavigate();
@@ -14,8 +15,8 @@ const ReWriteEditor = () => {
   const author = useAppSelector((state) => state.user.email);
 
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [file, setFile] = useState(null);
+  const [text, setText] = useState<string>("");
+  const [file, setFile] = useState<File | null>(null);
 
   // get original data
 
@@ -40,7 +41,7 @@ const ReWriteEditor = () => {
     }
   };
 
-  const handleTitleChange = (event) => {
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
@@ -81,7 +82,7 @@ const ReWriteEditor = () => {
                 url,
                 id,
               };
-              setDoc(doc(db, "공지사항", id), notificationData)
+              setDoc(doc(db, "공지사항", `${id}`), notificationData)
                 .then(() => {
                   alert("등록되었습니다.");
                   navigate("/wiki");
@@ -113,6 +114,12 @@ const ReWriteEditor = () => {
     },
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setFile(event.target.files[0]);
+    }
+  };
+
   return (
     <>
       <div className={styles.page}>
@@ -131,7 +138,7 @@ const ReWriteEditor = () => {
             <input
               type="file"
               required
-              onChange={(event) => setFile(event.target.files[0])}
+              onChange={(event) => handleFileChange(event)}
             />
           </div>
           <ReactQuill

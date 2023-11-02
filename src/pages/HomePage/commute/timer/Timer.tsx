@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react";
 import styles from "./Timer.module.scss";
-import { useAppDispatch } from "../../../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 import {
   setCommuteTime,
   setLeaveTime,
   setTimerOn,
 } from "../../../../store/commute/commuteSlice";
-import { useSelector } from "react-redux";
 
 const Timer = () => {
   const dispatch = useAppDispatch();
-  const timerOn = useSelector((state) => state.commute.isCommute);
+  const timerOn = useAppSelector((state) => state.commute.isCommute);
 
-  const [commuteTimeStamp, setCommuteTimeStamp] = useState(
-    JSON.parse(localStorage.getItem("commuteStamp"))
+  const [commuteTimeStamp, setCommuteTimeStamp] = useState<any>(
+    JSON.parse(
+      localStorage.getItem("commuteStamp")
+        ? JSON.parse(localStorage.getItem("commuteStamp") as any | "")
+        : ""
+    )
   );
+
   const [isCommute, setIsCommute] = useState(true);
 
-  const [hours, setHours] = useState("");
-  const [minutes, setMinutes] = useState("");
-  const [seconds, setSeconds] = useState("");
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
   function setCommuteStamp() {
     const timestamp = new Date().getTime();
@@ -82,7 +86,7 @@ const Timer = () => {
 
   // expirationDate
 
-  const dayString = (currentDate) => {
+  const dayString = (currentDate: any) => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;
     const day = currentDate.getDate();

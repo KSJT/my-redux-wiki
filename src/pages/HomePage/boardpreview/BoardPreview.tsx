@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
 const BoardPreview = () => {
-  const [recentBoard, setRecentBoard] = useState({});
+  const [recentBoard, setRecentBoard] = useState<any>({});
 
   const getRecentBoard = async () => {
     const docRef = collection(db, "board");

@@ -1,4 +1,4 @@
-type BoardArticle = {
+export type BoardArticle = {
   id: string;
   author: string;
   url: string;

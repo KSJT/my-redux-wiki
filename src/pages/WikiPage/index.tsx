@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./Wiki.module.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Page from "./Page/Page";
@@ -15,7 +15,7 @@ const WikiPage = () => {
     const q = query(docRef, orderBy("timestamp", "asc"));
     const querySnapshot = await getDocs(q);
 
-    const notificationsData = [];
+    const notificationsData: any = [];
     querySnapshot.forEach((doc) => {
       notificationsData.push(doc.data());
     });

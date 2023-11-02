@@ -15,11 +15,11 @@ const Editor = () => {
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState("");
   const [select, setSelect] = useState("");
 
-  const handleTitleChange = (event) => {
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
@@ -93,6 +93,12 @@ const Editor = () => {
     },
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setFile(event.target.files[0]);
+    }
+  };
+
   return (
     <>
       <div className={styles.form_container}>
@@ -119,7 +125,7 @@ const Editor = () => {
           >
             <option value=""></option>
             <option value="공지사항">공지사항</option>
-            {allCategories.map((category) => (
+            {allCategories.map((category: any) => (
               <option key={category.name} value={category.name}>
                 {category.name}
               </option>
@@ -130,7 +136,7 @@ const Editor = () => {
             <input
               className={styles.file_input}
               type="file"
-              onChange={(event) => setFile(event.target.files[0])}
+              onChange={(event) => handleFileChange(event)}
             />
           ) : null}
         </div>
