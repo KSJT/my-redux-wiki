@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Form from "../../components/form/Form";
 import styles from "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";

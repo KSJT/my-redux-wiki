@@ -4,7 +4,7 @@ const isEditCategory = createSlice({
   name: "isEditCategory",
   initialState: false,
   reducers: {
-    setIsEditCategory: (state, action) => {
+    setIsEditCategory: (_, action) => {
       return action.payload;
     },
   },

@@ -1,5 +1,4 @@
 import { getAuth, signOut } from "firebase/auth";
-import React from "react";
 import { app } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../store/user/userSlice";

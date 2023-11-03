@@ -3,8 +3,7 @@ import styles from "./BoardEditPage.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db, storage } from "../../firebase";
-import { ref } from "firebase/storage";
+import { db } from "../../firebase";
 import ReactQuill from "react-quill";
 
 const BoardEditPage = () => {
@@ -53,7 +52,7 @@ const BoardEditPage = () => {
         id,
         author,
         ispinned,
-      }).then((res) => alert("등록되었습니다."));
+      }).then(() => alert("등록되었습니다."));
     } catch (error) {
       console.log(error);
     }

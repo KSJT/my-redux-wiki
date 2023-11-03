@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Index.module.scss";
 import Commute from "./commute/";
 import { useAppSelector } from "../../hooks/redux";
@@ -23,7 +23,7 @@ const HomePage = () => {
     });
   }, []);
 
-  const [isCheck, setIsCheck] = useState(false);
+  const [_, setIsCheck] = useState(false);
   const setModal = useAppSelector((state) => state.modal.isCheck);
   useEffect(() => {
     if (setModal) {

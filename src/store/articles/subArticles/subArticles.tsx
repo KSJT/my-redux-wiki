@@ -4,7 +4,7 @@ export const subArticles = createSlice({
   name: "subArticles",
   initialState: [],
   reducers: {
-    getAllSubArticles: (state, action) => {
+    getAllSubArticles: (_, action) => {
       return action.payload;
     },
   },

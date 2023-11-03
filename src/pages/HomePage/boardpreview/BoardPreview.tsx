@@ -1,5 +1,5 @@
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../../../firebase";
 import styles from "./BoardPreview.module.scss";
 import { Link } from "react-router-dom";

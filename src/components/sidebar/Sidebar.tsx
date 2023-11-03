@@ -15,15 +15,12 @@ import {
 import { getAllNotifications } from "../../store/articles/notificationsSlice";
 import { db } from "../../firebase";
 import { addNewCategory } from "../../store/articles/newCategory/newCategorySlice";
-import NewCategory from "../../pages/WikiPage/Category/NewCategory";
 import { setIsEditCategory } from "../../store/articles/newCategory/categoryEditSlice";
-import { getAllSubArticles } from "../../store/articles/subArticles/subArticles";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
 
   const allNotis = useAppSelector((state) => state.allNotis);
-  const allCategories = useAppSelector((state) => state.newCategories);
 
   const [isClicked, setIsClicked] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -106,17 +103,6 @@ const Sidebar = () => {
       });
   };
 
-  const getSubArticleList = async (category: any) => {
-    const docRef = collection(db, category.name);
-    const querySnapshot = await getDocs(docRef);
-
-    const articleData: any = [];
-    querySnapshot.forEach((doc) => {
-      articleData.push(doc.data());
-    });
-    dispatch(getAllSubArticles(articleData));
-  };
-
   return (
     <div className={styles.sidebar_wrapper}>
       {/* preset notification category */}
@@ -132,18 +118,6 @@ const Sidebar = () => {
         </ul>
       </div>
 
-      {/* bring other category */}
-      <div>
-        {allCategories
-          ? allCategories.map((category: any) => (
-              <NewCategory
-                getSubArticleList={() => getSubArticleList(category)}
-                key={category.id}
-                category={category}
-              />
-            ))
-          : null}
-      </div>
       {/* add category input set */}
 
       {isAdd ? (

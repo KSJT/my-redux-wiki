@@ -1,17 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import styles from "./Modal.module.scss";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppSelector } from "../../hooks/redux";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
-import { setModal } from "../../store/modal/modalSlice";
 
 const Modal = () => {
   const isCheck = useAppSelector((state) => state.modal.isCheck);
   const isCommute = useAppSelector((state) => state.commute);
-
-  interface CommuteData {
-    commuteStamp: number;
-    expirationDate: string;
-  }
 
   const commuteStampString: any = localStorage.getItem("commuteStamp");
   const commuteStamp = JSON.parse(commuteStampString)?.commuteTimeStamp;

@@ -6,7 +6,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../../../firebase";
 import parse from "html-react-parser";
 import styles from "./BoardPinned.module.scss";

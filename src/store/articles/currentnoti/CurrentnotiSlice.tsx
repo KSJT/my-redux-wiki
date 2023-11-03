@@ -4,7 +4,7 @@ export const currentnotiSlice = createSlice({
   name: "currentNoti",
   initialState: "",
   reducers: {
-    setCurrentNoti: (state, action) => action.payload,
+    setCurrentNoti: (_, action) => action.payload,
   },
 });
 
