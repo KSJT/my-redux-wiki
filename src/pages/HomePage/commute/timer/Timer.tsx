@@ -11,13 +11,21 @@ const Timer = () => {
   const dispatch = useAppDispatch();
   const timerOn = useAppSelector((state) => state.commute.isCommute);
 
-  const [commuteTimeStamp, setCommuteTimeStamp] = useState<any>(
-    JSON.parse(
-      localStorage.getItem("commuteStamp")
-        ? JSON.parse(localStorage.getItem("commuteStamp") as any | "")
-        : ""
-    )
-  );
+  const commuteStampString = localStorage.getItem("commuteStamp");
+  const parsedCommuteStamp = commuteStampString
+    ? JSON.parse(commuteStampString)
+    : null; // Adjust the default value as needed
+
+  const [commuteTimeStamp, setCommuteTimeStamp] =
+    useState<any>(parsedCommuteStamp);
+
+  // const [commuteTimeStamp, setCommuteTimeStamp] = useState<any>(
+  //   JSON.parse(
+  //     localStorage.getItem("commuteStamp")
+  //       ? JSON.parse(localStorage.getItem("commuteStamp") as any | "")
+  //       : ""
+  //   )
+  // );
 
   const [isCommute, setIsCommute] = useState(true);
 
